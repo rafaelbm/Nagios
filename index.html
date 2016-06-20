@@ -138,7 +138,7 @@ Makefile:296: recipe for target 'install-webconf' failed
 make: *** [install-webconf] Error 1</p>
 </blockquote>
 
-<p>A mensagem de erro a cima descreve que o nagios está tentando criar o arquivo <strong>nagios.conf</strong> dentro do diretório <strong>/etc/httpd.conf/</strong>. Mas em sistemas derivados do Ubuntu o <strong>nagios.conf</strong> deve ser colocado no diretório /etc/apache2/sites-enabled/</p>
+<p>A mensagem de erro acima descreve que o nagios está tentando criar o arquivo <strong>nagios.conf</strong> dentro do diretório <strong>/etc/httpd.conf/</strong>. Mas em sistemas derivados do Ubuntu o <strong>nagios.conf</strong> deve ser colocado no diretório /etc/apache2/sites-enabled/</p>
 
 <p>Para tal, execute o seguinte comando no lugar do <strong>make install-webconf</strong>.</p>
 
@@ -193,7 +193,7 @@ make install
 
 <p>Os arquivos com configurações de exemplo do Nagios estão localizados no diretório <strong>/usr/local/nagios/etc</strong>.Esses arquivos de exemplo devem funcionar bem para uma introdução ao Nagios. No entando, se você quiser, precisará colocar o seu ID e e-mail para receber alertas.</p>
 
-<p>Para tal, edite o arquivo de configuração <strong>/usr/local/nagios/etc/objects/contacts.cfg</strong> e altere o e-mail associado a contato <em>nagiosadmin</em> este e-mail será onde os alertas serão enviados</p>
+<p>Para tal, edite o arquivo de configuração <strong>/usr/local/nagios/etc/objects/contacts.cfg</strong> e altere o e-mail associado ao contato <em>nagiosadmin</em>. Este e-mail será onde os alertas serão enviados</p>
 
 <pre><code>nano /usr/local/nagios/etc/objects/contacts.cfg
 </code></pre>
@@ -217,7 +217,7 @@ make install
 <pre><code>nano /etc/apache2/sites-enabled/nagios.conf
 </code></pre>
 
-<p>E edite as seguintes linhas, se você desejar acessar o nagios console administrativo de uma determinada
+<p>E edite as seguintes linhas se você desejar acessar o nagios console administrativo de uma determinada
  faixa de IP.</p>
 
 <pre><code>[...]
@@ -248,7 +248,7 @@ a2enmod cgi
 <pre><code>/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
 </code></pre>
 
-<p>Caso o comando a cima não tenha apontado erros, podemos iniciar o serviço nagios: </p>
+<p>Caso o comando acima não tenha apontado erros, podemos iniciar o serviço nagios: </p>
 
 <pre><code>service nagios start
 </code></pre>
@@ -264,7 +264,7 @@ a2enmod cgi
 
 <p><img src="http://www.unixmen.com/wp-content/uploads/2015/11/Nagios-Core-Google-Chrome_002.jpg" alt=""></p>
 
-<p>Clique na seção de <strong>"Hosts"</strong> no painel esquerdo. Você verá os hosts que estão sendo monitorados pelo servidor Nagios. Nós ainda não adicionou nenhum host. Então monitora o localhost apenas.</p>
+<p>Clique na seção de <strong>"Hosts"</strong> no painel esquerdo. Você verá os hosts que estão sendo monitorados pelo servidor Nagios. Nós ainda não adicionamos nenhum host. Então apenas o localhost será exibido na lista.</p>
 
 <p><img src="http://www.unixmen.com/wp-content/uploads/2015/11/Nagios-Core-Google-Chrome_003.jpg" alt=""></p>
 
@@ -305,7 +305,7 @@ allowed_hosts=127.0.0.1 192.168.1.103
 <pre><code>/etc/init.d/nagios-nrpe-server restart
 </code></pre>
 
-<p>Agora, <strong>volte ao Nagios server</strong> e adicionei os clientes (no arquivo de configuração).
+<p>Agora, <strong>volte ao Nagios server</strong> e adicione os clientes (no arquivo de configuração).
 Para tal, Edite o arquivo <strong>"/usr/local/nagios/etc/nagios.cfg"</strong>,</p>
 
 <pre><code>nano /usr/local/nagios/etc/nagios.cfg
@@ -350,7 +350,7 @@ notification_period             24x7
 <pre><code>service nagios restart
 </code></pre>
 
-<p>Aguarde alguns segundos, e atualize a página administrativa do nagios no browser e navegue até a sessão de <strong>hosts</strong> no painel da esquerda. Agora, você verá o cliente que foi adicionado recentemente. Click nele para visualizer se tem alguma coisa errada ou algum alerta.</p>
+<p>Aguarde alguns segundos e atualize a página administrativa do nagios no browser, e etão navegue até a sessão de <strong>hosts</strong> no painel da esquerda. Agora, você verá o cliente que foi adicionado recentemente. Click nele para visualizer se tem alguma coisa errada ou algum alerta.</p>
 
 <p><img src="http://www.unixmen.com/wp-content/uploads/2015/11/Nagios-Core-Google-Chrome_005.jpg" alt=""> </p>
 
@@ -363,7 +363,7 @@ notification_period             24x7
 <h3>
 <a id="definindo-serviço" class="anchor" href="#definindo-servi%C3%A7o" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Definindo serviço</h3>
 
-<p>Acabamos de definir um cliente para ser monitorado. Agora, vamos adicionar alguns serviços do cliente. Por exemplo, para monitor o serviço <strong>ssh</strong> por exemplo, adicione as seguintes linhas no arquivo <strong>"/usr/local/nagios/etc/servers/clients.cfg"</strong>.</p>
+<p>Acabamos de definir um cliente para ser monitorado. Agora, vamos adicionar alguns serviços do cliente. Por exemplo, para monitor o serviço <strong>ssh</strong>, adicione as seguintes linhas no arquivo <strong>"/usr/local/nagios/etc/servers/clients.cfg"</strong>.</p>
 
 <pre><code>nano /usr/local/nagios/etc/services/clients.cfg
 </code></pre>
@@ -386,7 +386,7 @@ define service {
 <pre><code>service nagios restart
 </code></pre>
 
-<p>Aguarde alguns segundos (<strong>90</strong> segundos por padrão), e verifique pelos serviços adicionados (exemplo: ssh) na interface web do nagios. Navegue para a sessão <strong>Services</strong> no menu esquerdo, você verá o serviço <strong>ssh</strong> ai.</p>
+<p>Aguarde alguns segundos (<strong>90</strong> segundos por padrão), e verifique pelos serviços adicionados (exemplo: ssh) na interface web do nagios. Navegue para a sessão <strong>Services</strong> no menu esquerdo, você verá o serviço <strong>ssh</strong> na lista.</p>
 
 <p><img src="http://www.unixmen.com/wp-content/uploads/2015/11/Nagios-Core-Google-Chrome_007.jpg" alt=""></p>
 
