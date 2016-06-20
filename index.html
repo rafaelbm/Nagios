@@ -1,53 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
+    <meta charset="UTF-8">
     <title>Nagios by rafaelbm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Nagios</h1>
+      <h2 class="project-tagline">Trabalho do tio Lu sobre o Nagios</h2>
+      <a href="https://github.com/rafaelbm/Nagios" class="btn">View on GitHub</a>
+      <a href="https://github.com/rafaelbm/Nagios/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/rafaelbm/Nagios/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <header>
-      <div class="container">
-        <h1>Nagios</h1>
-        <h2>Trabalho do tio Lu sobre o Nagios</h2>
-
-        <section id="downloads">
-          <a href="https://github.com/rafaelbm/Nagios/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/rafaelbm/Nagios/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/rafaelbm/Nagios" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
-
-    <div class="container">
-      <section id="main_content">
-        <h1>
+    <section class="main-content">
+      <h1>
 <a id="instalando-nagios-411" class="anchor" href="#instalando-nagios-411" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Instalando Nagios 4.1.1</h1>
 
 <p>Tutorial baseado no seguinte <a href="http://www.unixmen.com/how-to-install-nagios-core-4-1-1-in-ubuntu-15-10/">post</a>.</p>
 
 <blockquote>
-<p>Nagios é sistema, que pode ser usado para monitoramento de infra-estrutura de rede. Usando Nagios, podemos &gt;monitorar servidores, switches, aplicações e serviços etc. Alerta o administrador do sistema quando algo der errado e também alertas quando esses erros tenham sido corrigidos.</p>
+<p>Nagios é sistema, que pode ser usado para monitoramento de infra-estrutura de rede. Usando Nagios, podemos monitorar servidores, switches, aplicações e serviços etc. Alerta o administrador do sistema quando algo der errado e também alertas quando esses erros tenham sido corrigidos.</p>
 </blockquote>
 
 <h2>
-<a id="funcionaliades" class="anchor" href="#funcionaliades" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Funcionaliades</h2>
+<a id="principais-funcionaliades" class="anchor" href="#principais-funcionaliades" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Principais funcionaliades</h2>
 
 <ul>
-<li>Monitorar toda sua infraestrutura de ti.</li>
-<li>Identify problems before they occur.</li>
-<li>Identificar problemas antes que eles aconteçam</li>
+<li>Monitorar toda sua infraestrutura de TI.</li>
 <li>Saber imediatamente quando problemas surgirem</li>
 <li>Compartilhar dados de disponibilidade com as partes interessadas</li>
 <li>Detectar violações de segurança</li>
-<li>Planos e orçamento para upgrades de TE.</li>
+<li>Planos e orçamento para atualizações na infraestrutura de TI.</li>
 <li>Reduza as perdas de tempo de inatividade e negócios.</li>
 </ul>
 
@@ -276,10 +265,134 @@ a2enmod cgi
 
 <p><img src="http://www.unixmen.com/wp-content/uploads/2015/11/Nagios-Core-Google-Chrome_004.jpg" alt=""></p>
 
-<p>É isso, instalamos e configuramos o Nagios! </p>
-      </section>
-    </div>
+<p>É isso, instalamos e configuramos o Nagios!</p>
 
-    
+<h2>
+<a id="adicionar-clintes-monitorados-ao-servidor-nagios" class="anchor" href="#adicionar-clintes-monitorados-ao-servidor-nagios" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Adicionar clintes monitorados ao servidor Nagios</h2>
+
+<p>Agora, vamos adicionar alguns clientes para serem monitorados pelo servidor Nagios.
+Para isso precisamos instalar o <strong>nrpe</strong> e o <strong>nagios-plugin</strong> em nossos alvos de monitoramento.</p>
+
+<h3>
+<a id="no-debianlinux" class="anchor" href="#no-debianlinux" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>No Debian/Linux</h3>
+
+<pre><code>apt-get update
+apt-get install nagios-nrpe-server nagios-plugins
+</code></pre>
+
+<p>Configure os alvos de monitoramento</p>
+
+<p>Edite o arquivo <strong>/etc/nagios/nrpe.cfg</strong>,</p>
+
+<pre><code>nano /etc/nagios/nrpe.cfg
+</code></pre>
+
+<p>Adicione o ip do seu servidor Nagios:</p>
+
+<pre><code>[...]
+## Encontre as seguintes linhas e adicione o ip do servidor Nagios ##
+allowed_hosts=127.0.0.1 192.168.1.103
+[...]
+</code></pre>
+
+<p>Inicie o serviço nrpe:</p>
+
+<pre><code>/etc/init.d/nagios-nrpe-server restart
+</code></pre>
+
+<p>Agora, <strong>volte ao Nagios server</strong> e adicionei os clientes (no arquivo de configuração).
+Para tal, Edite o arquivo <strong>"/usr/local/nagios/etc/nagios.cfg"</strong>,</p>
+
+<pre><code>nano /usr/local/nagios/etc/nagios.cfg
+</code></pre>
+
+<p>e remova o comentário da seguinte linha</p>
+
+<pre><code>## Encontre e remova o comentário da seguinte linha ##
+cfg_dir=/usr/local/nagios/etc/servers
+</code></pre>
+
+<p>Crie um diretório chamado <strong>"servers"</strong> dentro da pasta "/usr/local/nagios/etc/"</p>
+
+<pre><code>mkdir /usr/local/nagios/etc/servers
+</code></pre>
+
+<p>Crie um arquivo de configuração para monitorar o cliente:</p>
+
+<pre><code>nano /usr/local/nagios/etc/servers/clients.cfg
+</code></pre>
+
+<p>Adicione as seguintes linhas:</p>
+
+<pre><code>define host{
+
+use                             linux-server
+host_name                       server.unixmen.local
+alias                           server
+address                         192.168.1.104 ##informe o ip do seu client aqui
+max_check_attempts              5
+check_period                    24x7
+notification_interval           30
+notification_period             24x7
+
+}  
+</code></pre>
+
+<p>Nesse caso, <strong>192.168.1.104</strong> é o ip do meu cliente Nagios e server.unixmen.local é o hostname.</p>
+
+<p>Por fim, reinicie o serviço do nagios.</p>
+
+<pre><code>service nagios restart
+</code></pre>
+
+<p>Aguarde alguns segundos, e atualize a página administrativa do nagios no browser e navegue até a sessão de <strong>hosts</strong> no painel da esquerda. Agora, você verá o cliente que foi adicionado recentemente. Click nele para visualizer se tem alguma coisa errada ou algum alerta.</p>
+
+<p><img src="http://www.unixmen.com/wp-content/uploads/2015/11/Nagios-Core-Google-Chrome_005.jpg" alt=""> </p>
+
+<p>Click no cliente para visualizar informações detalhadas:</p>
+
+<p><img src="http://www.unixmen.com/wp-content/uploads/2015/11/Nagios-Core-Google-Chrome_006.jpg" alt=""></p>
+
+<p>Da mesma forma, você pode definir mais clientes criando um arquivos de configuração separados para cada cliente. </p>
+
+<h3>
+<a id="definindo-serviço" class="anchor" href="#definindo-servi%C3%A7o" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Definindo serviço</h3>
+
+<p>Acabamos de definir um cliente para ser monitorado. Agora, vamos adicionar alguns serviços do cliente. Por exemplo, para monitor o serviço <strong>ssh</strong> por exemplo, adicione as seguintes linhas no arquivo <strong>"/usr/local/nagios/etc/servers/clients.cfg"</strong>.</p>
+
+<pre><code>nano /usr/local/nagios/etc/services/clients.cfg
+</code></pre>
+
+<p>Adicione as seguintes linhas:</p>
+
+<pre><code>[...]
+##ADICIONE AS LINHAS ABAIXO \/
+define service {
+    use                             generic-service
+    host_name                       server.unixmen.local
+    service_description             SSH
+    check_command                   check_ssh
+    notifications_enabled           0
+}
+</code></pre>
+
+<p>Salve e feche o arquivo. Reinicie o Nagios.</p>
+
+<pre><code>service nagios restart
+</code></pre>
+
+<p>Aguarde alguns segundos (<strong>90</strong> segundos por padrão), e verifique pelos serviços adicionados (exemplo: ssh) na interface web do nagios. Navegue para a sessão <strong>Services</strong> no menu esquerdo, você verá o serviço <strong>ssh</strong> ai.</p>
+
+<p><img src="http://www.unixmen.com/wp-content/uploads/2015/11/Nagios-Core-Google-Chrome_007.jpg" alt=""></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/rafaelbm/Nagios">Nagios</a> is maintained by <a href="https://github.com/rafaelbm">rafaelbm</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
   </body>
 </html>
