@@ -60,16 +60,16 @@ apt-get upgrade
 
 <p>Instale as dependências do nagios</p>
 
-<pre><code>apt-get install libgd2-xpm-dev libsnmp-perl libssl-dev openssl build-essential apache2 libapache2-mod-php5
+<pre><code>apt-get install libgd2-xpm-dev libsnmp-perl libssl-dev openssl build-essential apache2 libapache2-mod-php5 unzip
 </code></pre>
 
 <p>Crie um novo usuário do <strong><em>nagios</em></strong></p>
 
-<pre><code>useradd nagios -g nagios
+<pre><code>useradd -m nagios
 passwd nagios
 </code></pre>
 
-<p>Crie um novo grupo de <strong><em>nagcmd</em></strong> para permitir que comandos externos sejam enviados através da interface web. Adicione o usuário nagios e o usuário do apache ao grupo.</p>
+<p>Crie um novo grupo de usuários <strong><em>nagcmd</em></strong> para permitir que comandos externos sejam enviados através da interface web. Adicione o usuário nagios e o usuário do apache ao grupo.</p>
 
 <pre><code>sudo groupadd nagcmd
 sudo usermod -a -G nagcmd nagios
@@ -142,12 +142,12 @@ make: *** [install-webconf] Error 1</p>
 
 <p>Para tal, execute o seguinte comando no lugar do <strong>make install-webconf</strong>.</p>
 
-<pre><code>sudo /usr/bin/install -c -m 644 sample-config/httpd.conf /etc/apache2/sites-enabled/nagios.conf
+<pre><code>/usr/bin/install -c -m 644 sample-config/httpd.conf /etc/apache2/sites-enabled/nagios.conf
 </code></pre>
 
 <p>Verifique se o <strong>nagios.conf</strong> está no diretório /etc/apache2/sites-enabled.</p>
 
-<pre><code>sudo ls -l /etc/apache2/sites-enabled/
+<pre><code>ls -l /etc/apache2/sites-enabled/
 </code></pre>
 
 <p>O output desse comando deve ser semelhante a:</p>
@@ -178,7 +178,7 @@ lrwxrwxrwx 1 root root 35 Nov 28 16:49 000-default.conf -../sites-available/000-
 
 <p>Acesse o diretório extraído:</p>
 
-<pre><code>cd / nagios-plugins-2.1.1/
+<pre><code>cd nagios-plugins-2.1.1/
 </code></pre>
 
 <p>Execute os seguintes comandos um a um para compilar e instalar.</p>
