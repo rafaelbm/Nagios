@@ -71,9 +71,9 @@ passwd nagios
 
 <p>Crie um novo grupo de usuários <strong><em>nagcmd</em></strong> para permitir que comandos externos sejam enviados através da interface web. Adicione o usuário nagios e o usuário do apache ao grupo.</p>
 
-<pre><code>sudo groupadd nagcmd
-sudo usermod -a -G nagcmd nagios
-sudo usermod -a -G nagcmd www-data  
+<pre><code>groupadd nagcmd
+usermod -a -G nagcmd nagios
+usermod -a -G nagcmd www-data   
 </code></pre>
 
 <h2>
@@ -93,6 +93,11 @@ cd /usr/src/nagios
 <p>E baixe também os <a href="https://www.nagios.org/downloads/nagios-plugins/">plugins</a> do nagios</p>
 
 <pre><code>wget http://www.nagios-plugins.org/download/nagios-plugins-2.1.1.tar.gz
+</code></pre>
+
+<p>Caso algum erro relacionado a certificados ocorra durante a executação do <strong>wget</strong>, execute utilizando o parâmetro <strong>--no-check-certificate</strong></p>
+
+<pre><code>wget --no-check-certificate link
 </code></pre>
 
 <h2>
@@ -210,27 +215,9 @@ make install
  [...]
 </code></pre>
 
-<p>Save and close the file.</p>
+<p>Salve e feche o arquivo.</p>
 
-<p>Então, edite o arquivo <strong>/etc/apache2/sites-enabled/nagios-conf</strong></p>
 
-<pre><code>nano /etc/apache2/sites-enabled/nagios.conf
-</code></pre>
-
-<p>E edite as seguintes linhas se você desejar acessar o nagios console administrativo de uma determinada
- faixa de IP.</p>
-
-<pre><code>[...]
-## Comment the following lines 
-#   Order allow,deny
-#   Allow from all
-
-## Uncomment and Change lines as shown below
-Order deny,allow
-Deny from all
-Allow from 127.0.0.1 192.168.1.0/24 #seu ip vai aqui
-[...]
-</code></pre>
 
 <p>Habilitar os módulos do Apache e reconfiguração e cgi</p>
 
@@ -251,6 +238,42 @@ a2enmod cgi
 <p>Caso o comando acima não tenha apontado erros, podemos iniciar o serviço nagios: </p>
 
 <pre><code>service nagios start
+</code></pre>
+
+<p>Nas versões mais recentes do Ubuntu/Debian é possível que o comando acima lance o seguinte erro:</p>
+
+<pre><code>Failed to start nagios.service: Unit nagios.service failed to load: No such file or directory.
+</code></pre>
+
+<p>Para corrigir esse erro é necessário copiar o arquivo <strong>/etc/init.d/skeleton</strong> para *<em>/etc/init.d/nagios *</em>utilizando o seguinte comando:</p>
+
+<pre><code>cp /etc/init.d/skeleton /etc/init.d/nagios
+</code></pre>
+
+<p>Edite o arquivo <strong>/etc/init.d/nagios</strong></p>
+
+<pre><code>nano /etc/init.d/nagios
+</code></pre>
+
+<p>Adicione as seguintes linhas:</p>
+
+<pre><code>DESC="Nagios"
+NAME=nagios
+DAEMON=/usr/local/nagios/bin/$NAME
+DAEMON_ARGS="-d /usr/local/nagios/etc/nagios.cfg"
+PIDFILE=/usr/local/nagios/var/$NAME.lock
+</code></pre>
+
+<p>Salve e feche o arquivo.</p>
+
+<p>É necessário alterar as permissões do arquivo.</p>
+
+<pre><code>chmod +x /etc/init.d/nagios
+</code></pre>
+
+<p>Agora é possível iniciar o serviço nagios utilizando o comando:</p>
+
+<pre><code>/etc/init.d/nagios start 
 </code></pre>
 
 <h2>
