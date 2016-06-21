@@ -163,7 +163,7 @@ lrwxrwxrwx 1 root root 35 Nov 28 16:49 000-default.conf -../sites-available/000-
 -rw-r--r-- 1 root root 1679 Nov 28 17:02 nagios.conf </p>
 </blockquote>
 
-<p>Crie um conta <strong><em>nagiosadmin</em></strong> para se autenticar a interface web do Nagios. <strong>Lembre da senha que você definir</strong>, ela será utilizada para logar na interface web.</p>
+<p>Crie uma conta <strong><em>nagiosadmin</em></strong> para a autenticação na interface web do Nagios. <strong>Lembre da senha que você definir</strong>, ela será utilizada para logar na interface web.</p>
 
 <pre><code>htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
 </code></pre>
@@ -176,7 +176,7 @@ lrwxrwxrwx 1 root root 35 Nov 28 16:49 000-default.conf -../sites-available/000-
 <h3>
 <a id="instalar-nagios-plugins" class="anchor" href="#instalar-nagios-plugins" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Instalar Nagios Plugins</h3>
 
-<p>Va para o diretório onde você baixou o nagios plugins, e extraia os arquivos.</p>
+<p>Va para o diretório (provavelmente o <strong>/usr/src/nagios</strong>) onde você baixou o nagios plugins, e extraia os arquivos </p>
 
 <pre><code>tar xzf nagios-plugins-2.1.1.tar.gz
 </code></pre>
@@ -245,7 +245,7 @@ a2enmod cgi
 <pre><code>Failed to start nagios.service: Unit nagios.service failed to load: No such file or directory.
 </code></pre>
 
-<p>Para corrigir esse erro é necessário copiar o arquivo <strong>/etc/init.d/skeleton</strong> para *<em>/etc/init.d/nagios *</em>utilizando o seguinte comando:</p>
+<p>Para corrigir esse erro é necessário copiar o arquivo <strong>/etc/init.d/skeleton</strong> para <strong>/etc/init.d/nagios</strong> utilizando o seguinte comando:</p>
 
 <pre><code>cp /etc/init.d/skeleton /etc/init.d/nagios
 </code></pre>
@@ -373,7 +373,7 @@ notification_period             24x7
 <pre><code>service nagios restart
 </code></pre>
 
-<p>Aguarde alguns segundos e atualize a página administrativa do nagios no browser, e etão navegue até a sessão de <strong>hosts</strong> no painel da esquerda. Agora, você verá o cliente que foi adicionado recentemente. Click nele para visualizer se tem alguma coisa errada ou algum alerta.</p>
+<p>Aguarde alguns segundos e atualize a página administrativa do nagios no browser, e etão navegue até a seção de <strong>hosts</strong> no painel da esquerda. Agora, você verá o cliente que foi adicionado recentemente. Click nele para visualizer se tem alguma coisa errada ou algum alerta.</p>
 
 <p><img src="http://www.unixmen.com/wp-content/uploads/2015/11/Nagios-Core-Google-Chrome_005.jpg" alt=""> </p>
 
@@ -409,7 +409,7 @@ define service {
 <pre><code>service nagios restart
 </code></pre>
 
-<p>Aguarde alguns segundos (<strong>90</strong> segundos por padrão), e verifique pelos serviços adicionados (exemplo: ssh) na interface web do nagios. Navegue para a sessão <strong>Services</strong> no menu esquerdo, você verá o serviço <strong>ssh</strong> na lista.</p>
+<p>Aguarde alguns segundos (<strong>90</strong> segundos por padrão), e verifique pelos serviços adicionados (exemplo: ssh) na interface web do nagios. Navegue para a seção <strong>Services</strong> no menu esquerdo, você verá o serviço <strong>ssh</strong> na lista.</p>
 
 <p><img src="http://www.unixmen.com/wp-content/uploads/2015/11/Nagios-Core-Google-Chrome_007.jpg" alt=""></p>
 
