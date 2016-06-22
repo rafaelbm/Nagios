@@ -369,7 +369,7 @@ notification_period             24x7
 
 <p>Por fim, reinicie o serviço do nagios.</p>
 
-<pre><code>/etc/init.d/nagios start restart
+<pre><code>/etc/init.d/nagios restart
 </code></pre>
 
 <p>Aguarde alguns segundos e atualize a página administrativa do nagios no browser, e então navegue até a seção de <strong>hosts</strong> no painel da esquerda. Agora, você verá o cliente que foi adicionado recentemente. Click nele para visualizar se tem alguma coisa errada ou algum alerta.</p>
@@ -405,7 +405,7 @@ define service {
 
 <p>Salve e feche o arquivo. Reinicie o Nagios.</p>
 
-<pre><code>/etc/init.d/nagios start restart
+<pre><code>/etc/init.d/nagios restart
 </code></pre>
 
 <p>Aguarde alguns segundos (<strong>90</strong> segundos por padrão), e verifique pelos serviços adicionados (exemplo: ssh) na interface web do nagios. Navegue para a seção <strong>Services</strong> no menu esquerdo, você verá o serviço <strong>ssh</strong> na lista.</p>
