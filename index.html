@@ -162,7 +162,7 @@ lrwxrwxrwx 1 root root 35 Nov 28 16:49 000-default.conf -../sites-available/000-
 -rw-r--r-- 1 root root 1679 Nov 28 17:02 nagios.conf </p>
 </blockquote>
 
-<p>Crie uma conta <strong><em>nagiosadmin</em></strong> para a autenticação na interface web do Nagios. <strong>Lembre da senha que você definir</strong>, ela será utilizada para logar na interface web.</p>
+<p>Crie uma conta <strong><em>nagiosadmin</em></strong> para a autenticação na interface web do Nagios. <strong>Lembre-se da senha que você definir</strong>, ela será utilizada para logar na interface web.</p>
 
 <pre><code>htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
 </code></pre>
@@ -297,7 +297,7 @@ PIDFILE=/usr/local/nagios/var/$NAME.lock
 <p>É isso, instalamos e configuramos o Nagios!</p>
 
 <h2>
-<a id="adicionar-clintes-monitorados-ao-servidor-nagios" class="anchor" href="#adicionar-clintes-monitorados-ao-servidor-nagios" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Adicionar clintes monitorados ao servidor Nagios</h2>
+<a id="adicionar-clientes-monitorados-ao-servidor-nagios" class="anchor" href="#adicionar-clientes-monitorados-ao-servidor-nagios" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Adicionar clientes monitorados ao servidor Nagios</h2>
 
 <p>Agora, vamos adicionar alguns clientes para serem monitorados pelo servidor Nagios.
 Para isso precisamos instalar o <strong>nrpe</strong> e o <strong>nagios-plugin</strong> em nossos alvos de monitoramento.</p>
@@ -372,7 +372,7 @@ notification_period             24x7
 <pre><code>service nagios restart
 </code></pre>
 
-<p>Aguarde alguns segundos e atualize a página administrativa do nagios no browser, e etão navegue até a seção de <strong>hosts</strong> no painel da esquerda. Agora, você verá o cliente que foi adicionado recentemente. Click nele para visualizer se tem alguma coisa errada ou algum alerta.</p>
+<p>Aguarde alguns segundos e atualize a página administrativa do nagios no browser, e então navegue até a seção de <strong>hosts</strong> no painel da esquerda. Agora, você verá o cliente que foi adicionado recentemente. Click nele para visualizar se tem alguma coisa errada ou algum alerta.</p>
 
 <p><img src="http://www.unixmen.com/wp-content/uploads/2015/11/Nagios-Core-Google-Chrome_005.jpg" alt=""> </p>
 
